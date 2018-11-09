@@ -1,0 +1,21 @@
+<project>
+	<target name = "clean">
+		<delete dir = "build/" >
+		</delete>
+	</target>
+	<target name = "compile" description="compiles and pushes all class files into their respective package directories in build/classes dir">
+		<mkdir dir="build/classes"/>
+		<javac srcdir="source" destdir="build/classes"/>
+	</target>
+	<target name="jar" depends="compile" description="creates jar file">
+		<mkdir dir="build/jar"/>
+		<jar destfile="build/jar/Interpreter.jar" basedir="build/classes/">
+			<manifest>
+				<attribute name="Main-Class" value="myinterpreter.Interpreter"/>
+			</manifest>
+		</jar>	
+	</target>
+	<target name="run" depends="jar">
+		<java jar="build/jar/Interpreter.jar" fork="true"/>
+	</target>
+</project>
